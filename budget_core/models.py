@@ -7,20 +7,16 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
 
 
 class Budget(models.Model):
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
-    )
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, blank=False)
-    total = models.DecimalField(
-        max_digits=6, decimal_places=2, blank=True, default=0.0
-    )
+    total = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.0)
     shared_with = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL, related_name="budgets", blank=True
     )
@@ -31,29 +27,23 @@ class Budget(models.Model):
 
     def recalculate_total(self, amount):
         self.total += amount
-        self.save()  # maybe use update fields here, make sure if needed
+        self.save()
 
 
 class BudgetItem(models.Model):
-    EXPENSE = 'EXPENSE'
-    INCOME = 'INCOME'
+    EXPENSE = "EXPENSE"
+    INCOME = "INCOME"
     ITEM_TYPE = [
-        (EXPENSE, 'EXPENSE'),
-        (INCOME, 'INCOME'),
+        (EXPENSE, "EXPENSE"),
+        (INCOME, "INCOME"),
     ]
     name = models.CharField(max_length=50, blank=False)
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+    item_type = models.CharField(max_length=32, choices=ITEM_TYPE, default=INCOME)
+    budget = models.ForeignKey(
+        Budget, on_delete=models.CASCADE, related_name="budget_items"
     )
-    amount = models.DecimalField(
-        max_digits=6, decimal_places=2, blank=True, null=True
-    )
-    item_type = models.CharField(
-        max_length=32,
-        choices=ITEM_TYPE,
-        default=INCOME
-    )
-    budget = models.ForeignKey(Budget, on_delete=models.CASCADE, related_name='budget_items')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

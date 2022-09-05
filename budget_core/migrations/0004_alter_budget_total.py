@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budget_core', '0003_budget_created_at_budgetitem_created_at_and_more'),
+        ("budget_core", "0003_budget_created_at_budgetitem_created_at_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='budget',
-            name='total',
-            field=models.DecimalField(blank=True, decimal_places=2, default=0.0, max_digits=6),
+            model_name="budget",
+            name="total",
+            field=models.DecimalField(
+                blank=True, decimal_places=2, default=0.0, max_digits=6
+            ),
         ),
     ]

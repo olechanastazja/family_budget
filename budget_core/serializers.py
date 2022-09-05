@@ -6,17 +6,21 @@ from budget_core.models import Budget, BudgetItem, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = "__all__"
 
 
 class BudgetItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = BudgetItem
-        fields = '__all__'
+        fields = "__all__"
 
     def create(self, validated_data):
-        budget = validated_data['budget']
-        amount = -validated_data['amount'] if validated_data['item_type'] == BudgetItem.EXPENSE else validated_data['amount']
+        budget = validated_data["budget"]
+        amount = (
+            -validated_data["amount"]
+            if validated_data["item_type"] == BudgetItem.EXPENSE
+            else validated_data["amount"]
+        )
         budget.recalculate_total(amount)
         return super().create(validated_data)
 
@@ -26,5 +30,5 @@ class BudgetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Budget
-        fields = '__all__'
-        read_only_fields = ('id', 'date_created', 'owner', 'total', 'budget_items')
+        fields = "__all__"
+        read_only_fields = ("id", "date_created", "owner", "total", "budget_items")

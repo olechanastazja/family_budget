@@ -12,6 +12,9 @@ class IsBudgetOwnerOrReadOnly(IsAuthenticated):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
-            return obj.owner == request.user or obj.shared_with.filter(id=request.user.id).exists()
+            return (
+                obj.owner == request.user
+                or obj.shared_with.filter(id=request.user.id).exists()
+            )
         # Instance must have an attribute named `owner`.
         return obj.owner == request.user

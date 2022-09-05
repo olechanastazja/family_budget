@@ -8,25 +8,33 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budget_core', '0002_rename_total_budgetitem_amount'),
+        ("budget_core", "0002_rename_total_budgetitem_amount"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='budget',
-            name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="budget",
+            name="created_at",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='budgetitem',
-            name='created_at',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="budgetitem",
+            name="created_at",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='budgetitem',
-            name='budget',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='budget_items', to='budget_core.budget'),
+            model_name="budgetitem",
+            name="budget",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="budget_items",
+                to="budget_core.budget",
+            ),
         ),
     ]
