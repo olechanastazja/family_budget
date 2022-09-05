@@ -1,5 +1,3 @@
-import random
-from datetime import date, time
 import uuid
 
 from django.contrib.auth.models import User
