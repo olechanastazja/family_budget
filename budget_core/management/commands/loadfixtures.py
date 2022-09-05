@@ -5,7 +5,8 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
-from django.db import transaction
+from django.db import IntegrityError, transaction
+
 
 from budget_core.models import Budget, BudgetItem, Category
 
@@ -15,7 +16,10 @@ PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'fixtures')
 def load_users():
     with open(os.path.join(PATH, 'users.json')) as f:
         data = json.load(f)
-        return [User.objects.create(**user, username=uuid.uuid4()) for user in data]
+        return [
+            User.objects.create(**user).set_password(user['password'])
+            for user in data
+        ]
 
 
 def load_categories():
@@ -54,7 +58,13 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, *args, **options):
         try:
-            users = load_users()
+
+            try:
+                users = load_users()
+            except IntegrityError:
+                users = User.objects.all()
+                self.stdout.write(self.style.INFO('Users already exist in the database.'))
+
             categories = load_categories()
             budgets = load_budgets(users)
             [
