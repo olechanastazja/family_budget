@@ -49,7 +49,7 @@ class TestBudget:
         response = client.delete(url)
         assert response.status_code == status_code
 
-    @pytest.mark.parametrize('item_type', [BudgetItem.EXPANSE, BudgetItem.INCOME])
+    @pytest.mark.parametrize('item_type', [BudgetItem.EXPENSE, BudgetItem.INCOME])
     def test_budget_recalculate(
             self, api_client, budget_user1_only, user, budget_item_data, item_type
     ):
@@ -69,7 +69,7 @@ class TestBudget:
 
         assert item_response.status_code == status.HTTP_201_CREATED
         assert budget_resp.status_code == status.HTTP_200_OK
-        if item_type == BudgetItem.EXPANSE:
+        if item_type == BudgetItem.EXPENSE:
             assert float(end_budget_total) == initial_budget_total - budget_item_data['amount']
         elif item_type == BudgetItem.INCOME:
             assert float(end_budget_total) == initial_budget_total + budget_item_data['amount']

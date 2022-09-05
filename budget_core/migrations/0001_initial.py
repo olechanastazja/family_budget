@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
                 ('total', models.DecimalField(blank=True, decimal_places=2, max_digits=6, null=True)),
-                ('item_type', models.CharField(choices=[('EXPANSE', 'EXPANSE'), ('INCOME', 'INCOME')], default='INCOME', max_length=32)),
+                ('item_type', models.CharField(choices=[('EXPENSE', 'EXPANSE'), ('INCOME', 'INCOME')], default='INCOME', max_length=32)),
                 ('budget', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='budget_core.budget')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='budget_core.category')),
             ],

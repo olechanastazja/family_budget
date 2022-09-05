@@ -15,9 +15,8 @@ class BudgetItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        print('validate_data', validated_data)
         budget = validated_data['budget']
-        amount = -validated_data['amount'] if validated_data['item_type'] == BudgetItem.EXPANSE else validated_data['amount']
+        amount = -validated_data['amount'] if validated_data['item_type'] == BudgetItem.EXPENSE else validated_data['amount']
         budget.recalculate_total(amount)
         return super().create(validated_data)
 

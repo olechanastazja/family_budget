@@ -35,10 +35,10 @@ class Budget(models.Model):
 
 
 class BudgetItem(models.Model):
-    EXPANSE = 'EXPANSE'
+    EXPENSE = 'EXPENSE'
     INCOME = 'INCOME'
     ITEM_TYPE = [
-        (EXPANSE, 'EXPANSE'),
+        (EXPENSE, 'EXPENSE'),
         (INCOME, 'INCOME'),
     ]
     name = models.CharField(max_length=50, blank=False)

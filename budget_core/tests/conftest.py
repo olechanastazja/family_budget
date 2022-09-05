@@ -87,7 +87,7 @@ def budget_item_data(budget_user1_only, categories):
 def budget_expense(budget_item_data, categories, budget_user1_only):
     budget_item_data['budget'] = budget_user1_only
     budget_item_data['category'] = categories[0]
-    budget_item_data['item_type'] = BudgetItem.EXPANSE
+    budget_item_data['item_type'] = BudgetItem.EXPENSE
     return BudgetItem.objects.create(**budget_item_data)
 
 
