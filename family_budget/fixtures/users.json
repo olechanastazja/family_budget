@@ -1,0 +1,29 @@
+[
+  {
+      "is_superuser": true,
+      "password": "admin",
+      "first_name": "Admin",
+      "last_name": "Admin",
+      "email": "admin@gmail.com",
+      "is_staff": false,
+      "is_active": true
+  },
+  {
+      "is_superuser": false,
+      "password": "john1",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@gmail.com",
+      "is_staff": false,
+      "is_active": true
+  },
+  {
+      "is_superuser": false,
+      "password": "jane1",
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "jane.doe@gmail.com",
+      "is_staff": false,
+      "is_active": true
+  }
+]
