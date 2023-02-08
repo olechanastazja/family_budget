@@ -28,4 +28,4 @@ Then grab the access token and go ahead and use of it to GET/POST/PUT/PATCH or D
 ### Tests
 To run tests you can either use virtualenv with requirements specified in `requirements.txt` file 
 or execute them in a docker container. `pytest` is used so simple:
-`` pytest`` should do it. 
+`` pytest`` should do it
